@@ -2,47 +2,44 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Test Page</title>
+    <title>test</title>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
   </head>
   <body>
     <div id="app">
-      <button v-on:click='counter++'>Increase</button>
-      <button v-on:click='counter--'>Decrease</button>
-      <button v-on:click='secondCounter++'>Second Increase</button>
-      <button v-on:click='secondCounter--'>Second Decrease</button>
-      <p>Counter: {{ counter }} | {{ secondCounter }}</p>
-      <p>Result: {{ result() }} | {{ output }}</p>
+      <div class="demo" :style="myStyle"></div>
+      <div class="demo" :style="[myStyle, {height: width + 'px'}"></div>
+      <hr>
+      <input type="text" v-model="color">
+      <input type="text" v-model="width">
     </div>
   </body>
 
   <script>
     new Vue({
-      el: '#app',
-      data: {
-        counter: '0',
-        secondCounter: '0'
+      el:'#app',
+      data:{
+        color: 'green',
+        width: 100
       },
-      watch: {
-        counter: function(value){
-          var vm = this;
-          setTimeout(function() {
-            vm.counter = 0;
-          }, 2000);
-        }
-      },
-      computed: {
-        output: function(){
-          console.log('computed');
-          return this.secondCounter < 5 ? 'Smaller than 5' : 'Greater than 5';
-        }
-      },
-      methods:{
-        result: function(){
-          console.log('methods');
-          return this.counter < 5 ? 'Smaller than 5' : 'Greater than 5';
+      computed:{
+        myStyle: function(){
+          return {
+            backgroundColor : this.color,
+            width : this.width + 'px'
+          };
         }
       }
     })
   </script>
 </html>
+
+<style scoped>
+  .demo{
+    width: 100px;
+    height: 100px;
+    background-color: gray;
+    display: inline-block;
+    margin-left: 10px;
+  }
+</style>
