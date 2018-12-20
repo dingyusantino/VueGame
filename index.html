@@ -1,45 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>test</title>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  </head>
-  <body>
-    <div id="app">
-      <div class="demo" :style="myStyle"></div>
-      <div class="demo" :style="[myStyle, {height: width + 'px'}"></div>
-      <hr>
-      <input type="text" v-model="color">
-      <input type="text" v-model="width">
-    </div>
-  </body>
+<html>
+<head>
+    <title>Monster Slayer</title>
+    <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+  <!-- Health Bar Section -->
+    <section class="row">
+      <!-- Player Health Bar -->
+        <div class="small-6 columns">
+            <h1 class="text-center">YOU</h1>
+            <div class="healthbar">
+                <div
+                class="healthbar text-center"
+                style="background-color: green; margin: 0; color: white;"
+                :style="{width: playerHealth + '%'}"
+                >
+                  {{ playerHealth }}
+                </div>
+            </div>
+        </div>
+      <!-- Monster Health Bar -->
+        <div class="small-6 columns">
+            <h1 class="text-center">MONSTER</h1>
+            <div class="healthbar">
+                <div
+                class="healthbar text-center"
+                style="background-color: green; margin: 0; color: white;"
+                :style="{width: playerHealth + '%'}"
+                >
+                  {{ monsterHealth }}
+                </div>
+            </div>
+        </div>
+    </section>
+  <!-- Health Bar Section End-->
 
-  <script>
-    new Vue({
-      el:'#app',
-      data:{
-        color: 'green',
-        width: 100
-      },
-      computed:{
-        myStyle: function(){
-          return {
-            backgroundColor : this.color,
-            width : this.width + 'px'
-          };
-        }
-      }
-    })
-  </script>
+  <!-- Function Section -->
+    <section class="row controls" v-if='!isGameRuning'>
+        <div class="small-12 columns">
+            <button id="start-game">START NEW GAME</button>
+        </div>
+    </section>
+    <section class="row controls" v-else>
+        <div class="small-12 columns">
+            <button id="attack">ATTACK</button>
+            <button id="special-attack">SPECIAL ATTACK</button>
+            <button id="heal">HEAL</button>
+            <button id="give-up">GIVE UP</button>
+        </div>
+    </section>
+    <section class="row log">
+        <div class="small-12 columns">
+            <ul>
+                <li>
+
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+</body>
+
+<script src="app.js">
+
+</script>
 </html>
-
-<style scoped>
-  .demo{
-    width: 100px;
-    height: 100px;
-    background-color: gray;
-    display: inline-block;
-    margin-left: 10px;
-  }
-</style>
